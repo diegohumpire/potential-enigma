@@ -1,6 +1,6 @@
 <?php
 
-namespace Enigma\ApplicationServices\Exceptions;
+namespace Enigma\ApplicationServices\Auth\Exceptions;
 
 use Enigma\Shared\Errors\ApplicationException;
 

@@ -1,13 +1,12 @@
 <?php
 
-namespace Enigma\ApplicationServices;
+namespace Enigma\ApplicationServices\Auth;
 
-use Enigma\ApplicationServices\Exceptions\UnauthorizeUserException;
+use Enigma\ApplicationServices\Auth\Exceptions\UnauthorizeUserException;
 use Enigma\Auth\Domain\Password;
 use Enigma\Auth\Domain\Repositories\UserRepository;
 use Enigma\Auth\Domain\User;
 use Enigma\Auth\Domain\UserEmail;
-use Enigma\Shared\Bus\Commands\Command;
 
 class UserAuthenticate
 {

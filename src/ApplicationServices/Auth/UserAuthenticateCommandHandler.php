@@ -1,6 +1,6 @@
 <?php
 
-namespace Enigma\ApplicationServices;
+namespace Enigma\ApplicationServices\Auth;
 
 use Enigma\Auth\Domain\Password;
 use Enigma\Auth\Domain\UserEmail;

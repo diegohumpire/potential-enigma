@@ -1,10 +1,10 @@
 <?php
 
-namespace Enigma\ApplicationServices;
+namespace Enigma\ApplicationServices\Auth;
 
 use Enigma\Shared\Bus\Commands\Command;
 
-class UserAuthenticateCommand implements Command
+class UserCreatorCommand implements Command
 {
     private string $email;
     private string $password;
@@ -17,7 +17,7 @@ class UserAuthenticateCommand implements Command
 
     /**
      * Get the value of password
-     */
+     */ 
     public function getPassword()
     {
         return $this->password;
@@ -25,7 +25,7 @@ class UserAuthenticateCommand implements Command
 
     /**
      * Get the value of email
-     */
+     */ 
     public function getEmail()
     {
         return $this->email;

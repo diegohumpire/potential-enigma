@@ -1,11 +1,11 @@
 <?php
 
-namespace Tests\Unit\ApplicationServices;
+namespace Tests\Unit\ApplicationServices\Auth;
 
-use Enigma\ApplicationServices\Exceptions\UnauthorizeUserException;
-use Enigma\ApplicationServices\UserAuthenticate;
-use Enigma\ApplicationServices\UserAuthenticateCommand;
-use Enigma\ApplicationServices\UserAuthenticateCommandHandler;
+use Enigma\ApplicationServices\Auth\Exceptions\UnauthorizeUserException;
+use Enigma\ApplicationServices\Auth\UserAuthenticate;
+use Enigma\ApplicationServices\Auth\UserAuthenticateCommand;
+use Enigma\ApplicationServices\Auth\UserAuthenticateCommandHandler;
 use Enigma\Auth\Infraestructure\Eloquent\UserEloquentRepository;
 use Tests\TestCase;
 use Illuminate\Support\Facades\Hash;
