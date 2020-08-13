@@ -7,11 +7,23 @@ use Enigma\Shared\Domain\Aggregates\AggregateRoot;
 class Product extends AggregateRoot
 {
     private ProductId $productId;
-    private SupplierId $supplierId;
-    private Supplier $supplier;
     private ProductName $productName;
     private ProductPrice $productPrice;
     private ProductIsActive $productIsActive;
+    private SupplierId $supplierId;
+    private Supplier $supplier;
+
+    public function __construct(
+        ProductName $productName, 
+        ProductPrice $productPrice,
+        ProductIsActive $productIsActive,
+        SupplierId $supplierId
+    ) {
+        $this->productName = $productName;
+        $this->productPrice = $productPrice;
+        $this->productIsActive = $productIsActive;
+        $this->supplierId = $supplierId;
+    }
 
     /**
      * Get the value of productId
@@ -19,6 +31,18 @@ class Product extends AggregateRoot
     public function getProductId() : ProductId
     {
         return $this->productId;
+    }
+
+    /**
+     * Set the value of productId
+     *
+     * @return  self
+     */
+    public function setProductId(ProductId $productId) : Product
+    {
+        $this->productId = $productId;
+
+        return $this;
     }
 
     /**
