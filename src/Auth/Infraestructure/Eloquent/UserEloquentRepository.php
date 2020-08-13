@@ -12,7 +12,7 @@ use Enigma\Catalog\Domain\SupplierId;
 
 class UserEloquentRepository implements UserRepository
 {
-    public function findByEmail(UserEmail $userEmail): ?User
+    public function findByEmail(UserEmail $userEmail) : ?User
     {
         $userEloquent = EloquentUser::where('email', $userEmail->value())->first();
 
@@ -20,6 +20,24 @@ class UserEloquentRepository implements UserRepository
             return null;
         }
 
+        $user = new User($userEmail, new Password($userEloquent->password));
+
+        // Set AuthToken
+        $user->setAuthToken(new AuthToken($userEloquent->auth_token));
+        $user->setSupplierId(new SupplierId($userEloquent->supplier_id));
+
+        return $user;
+    }
+
+    public function findByAuthToken(AuthToken $authToken) : ?User
+    {
+        $userEloquent = EloquentUser::where('auth_token', $authToken->value())->first();
+
+        if (empty($userEloquent)) {
+            return null;
+        }
+
+        $userEmail = new UserEmail($userEloquent->email);
         $user = new User($userEmail, new Password($userEloquent->password));
 
         // Set AuthToken

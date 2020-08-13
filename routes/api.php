@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GenerateAuthTokenController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,10 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/auth/token', function (Request $request) {
-    return $request->user();
-});
-
-Route::post('/auth/user', function (Request $request) {
-
-});
+Route::post('/auth/token', 'GenerateAuthTokenController');
+Route::middleware('auth.token')->get('/me', 'UserInformationController');
+Route::middleware('auth.token')->get('/me/products', 'GetCatalogByUserController');
