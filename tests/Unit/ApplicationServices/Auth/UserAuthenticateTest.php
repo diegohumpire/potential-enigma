@@ -2,14 +2,15 @@
 
 namespace Tests\Unit\ApplicationServices\Auth;
 
-use Enigma\ApplicationServices\Auth\Exceptions\UnauthorizeUserException;
-use Enigma\ApplicationServices\Auth\UserAuthenticate;
-use Enigma\ApplicationServices\Auth\UserAuthenticateCommand;
-use Enigma\ApplicationServices\Auth\UserAuthenticateCommandHandler;
-use Enigma\Auth\Infraestructure\Eloquent\UserEloquentRepository;
+use App\Supplier;
 use Tests\TestCase;
 use Illuminate\Support\Facades\Hash;
+use Enigma\ApplicationServices\Auth\UserAuthenticate;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Enigma\ApplicationServices\Auth\UserAuthenticateCommand;
+use Enigma\Auth\Infraestructure\Eloquent\UserEloquentRepository;
+use Enigma\ApplicationServices\Auth\UserAuthenticateCommandHandler;
+use Enigma\ApplicationServices\Auth\Exceptions\UnauthorizeUserException;
 
 class UserAuthenticateTest extends TestCase
 {
@@ -65,6 +66,8 @@ class UserAuthenticateTest extends TestCase
         $emailMock = 'dhlogin_non_exist@logintest.com';
         $password = '123456';
 
+        factory(Supplier::class)->create();
+
         $userRepository = $this->app->make(UserEloquentRepository::class);
 
         $authenticateCommand = new UserAuthenticateCommand($emailMock, $password);
@@ -75,7 +78,8 @@ class UserAuthenticateTest extends TestCase
         $this->assertDatabaseHas('users', [
             'auth_token' => $user->getAuthToken()->value(),
             'email' => $emailMock,
-            'password' => $user->getPassword()->value()
+            'password' => $user->getPassword()->value(),
+            'supplier_id' => $user->getSupplierId()->value()
         ]);
     }
 }

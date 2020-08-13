@@ -4,14 +4,14 @@ namespace Enigma\Shared\Domain\ValueObject;
 
 class IntegerValueObject
 {
-    private int $value = 0;
+    private ?int $value = 0;
 
-    public function __construct(int $value = 0)
+    public function __construct(?int $value = 0)
     {
         $this->value = $value;
     }
 
-    public function value(): int
+    public function value(): ?int
     {
         return $this->value;
     }

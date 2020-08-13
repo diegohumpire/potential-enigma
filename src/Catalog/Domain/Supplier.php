@@ -7,6 +7,12 @@ class Supplier
     private SupplierName $supplierName;
     private SupplierId $supplierId;
 
+    public function __construct(SupplierId $supplierId, SupplierName $supplierName)
+    {
+        $this->supplierId = $supplierId;
+        $this->supplierName = $supplierName;
+    }
+
     /**
      * Get the value of supplierName
      */ 

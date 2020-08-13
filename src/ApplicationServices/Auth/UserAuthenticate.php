@@ -17,18 +17,17 @@ class UserAuthenticate
         $this->userRepository = $userRepository;
     }
 
+    /**
+     * @return User
+     */
     public function __invoke(UserEmail $userEmail, Password $password)
     {
         $user = $this->userRepository->findByEmail($userEmail);
 
         if (empty($user)) {
-            $newUser = new User($userEmail, $password);
-            $newUser->getPassword()->hashPassword();
-            $newUser->generateAuthToken();
-
-            $this->userRepository->save($newUser);
-
-            return $newUser;
+            $newUserCommandHandler = new UserCreatorCommandHandler(new UserCreator($this->userRepository));
+        
+            return $newUserCommandHandler(new UserCreatorCommand($userEmail->value(), $password->value()));
         }
 
         if ($user->checkPassword($password)) {

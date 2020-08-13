@@ -8,6 +8,7 @@ use Enigma\Auth\Domain\Password;
 use Enigma\Auth\Domain\Repositories\UserRepository;
 use Enigma\Auth\Domain\UserEmail;
 use Enigma\Auth\Domain\User;
+use Enigma\Catalog\Domain\SupplierId;
 
 class UserEloquentRepository implements UserRepository
 {
@@ -23,6 +24,7 @@ class UserEloquentRepository implements UserRepository
 
         // Set AuthToken
         $user->setAuthToken(new AuthToken($userEloquent->auth_token));
+        $user->setSupplierId(new SupplierId($userEloquent->supplier_id));
 
         return $user;
     }
@@ -38,6 +40,11 @@ class UserEloquentRepository implements UserRepository
 
         $userEloquent->email = $user->getUserEmail()->value();
         $userEloquent->auth_token = $user->getAuthToken()->value();
+        
+        if (!empty($user->getSupplierId()->value())) {
+            $userEloquent->supplier_id = $user->getSupplierId()->value();
+        }
+
         $userEloquent->save();
 
         return $user;

@@ -2,16 +2,21 @@
 
 namespace Enigma\Auth\Domain;
 
-final class User
+use Enigma\Catalog\Domain\SupplierId;
+use Enigma\Shared\Domain\Aggregates\AggregateRoot;
+
+final class User extends AggregateRoot
 {
     private UserEmail $userEmail;
     private ?Password $password = null;
     private ?AuthToken $authToken = null;
+    private SupplierId $supplierId;
 
     public function __construct(UserEmail $userEmail, ?Password $password) 
     {
         $this->userEmail = $userEmail;
         $this->password = $password;
+        $this->supplierId = new SupplierId();
     }
 
     public function checkPassword(Password $password) : bool
@@ -71,5 +76,25 @@ final class User
     public function getUserEmail() : UserEmail
     {
         return $this->userEmail;
+    }
+
+    /**
+     * Get the value of supplierId
+     */ 
+    public function getSupplierId()
+    {
+        return $this->supplierId;
+    }
+
+    /**
+     * Set the value of supplierId
+     *
+     * @return  self
+     */ 
+    public function setSupplierId($supplierId)
+    {
+        $this->supplierId = $supplierId;
+
+        return $this;
     }
 }
