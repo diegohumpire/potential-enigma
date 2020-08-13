@@ -29,7 +29,7 @@ class GenerateAuthTokenController extends Controller
             ])->setStatusCode(200);
 
         } catch(UnauthorizeUserException $exception) {
-            throw new UnauthorizedHttpException($exception->getMessage());
+            throw new UnauthorizedHttpException($exception->getMessage(), $exception->getMessage());
         }
     }
 }
